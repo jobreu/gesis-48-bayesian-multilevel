@@ -21,7 +21,12 @@ plot(M)
 
 # Out of sample predictive performance 
 waic(M_null, M)
-loo(M_null, M)
+# generally (waic): diff < 4 = no meaningful difference (lower waic = better)
+# diff > 7 or > 10 -> meaningful diff between models
+# if only 2 models are compared, differences in WAIC equal to 4, 6, 9 or 14
+# correspond to probabilities of approx. 0.9, 0.95, 0.99, and 0.999 respectively
+loo(M_null, M) # 2 algorithms that approximate leave-one-out cross validation
+# waic tends to be computationally more efficient than loo
 
 # Bayes factor of M_null v M
 bayes_factor(M, M_null)
